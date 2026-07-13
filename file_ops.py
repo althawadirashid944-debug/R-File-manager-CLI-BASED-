@@ -24,6 +24,11 @@ R::::::R     R:::::R
 R::::::::    ::::::::R
 RRRRRRRR    RRRRRRRR
 """
+
+
+
+
+
 clipboard = {
     "mode":None, # copy or paste mode
     "items": [] 
@@ -134,7 +139,7 @@ def resolve_trash_conflict(path):
 
 current_dir= Path.home() 
 def welcome_text():
-    print("welcome to R file manager a very heavy WIP and currently CLI based file manager written in Python")
+    print("welcome to R a hybrid shell like environment that combines simple python commands with bash")
 def show_banner():
     print(RED + big_r + RESET)
 def exit_program():
@@ -279,6 +284,7 @@ commands= {"pwd":show_location,
 }
 show_banner() 
 welcome_text() 
+subprocess.run(commands, shell=True)  
 
 while True:
     parts = input(">").strip().split()
@@ -292,7 +298,10 @@ while True:
     if cmd in commands:
         commands[cmd](*args)
     else:
-        print("Unknown command") 
+        try:
+            subprocess.run(parts) 
+        except FileNotFoundError:
+         print("Unknown command") 
 
 
 
