@@ -61,7 +61,7 @@ Example:
 Clone the repository:
 
 ```bash
-git clone 
+git clone  https://github.com/althawadirashid944-debug/R-Shell.git 
 cd R
 ```
 
