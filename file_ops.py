@@ -1,4 +1,5 @@
-import os
+import os 
+import shlex 
 from pathlib import Path
 import shutil 
 import sys 
@@ -142,13 +143,15 @@ def get_current_dir():
 
 current_dir= Path.home() 
 def welcome_text():
-    print("welcome to R a hybrid shell like environment that combines simple python commands with bash")
+    print("welcome to R a hybrid shell like environment that combines simple python commands with bash (type 'help' for a list of commands and their use)") 
 def show_banner():
     print(RED + big_r + RESET)
 def exit_program():
    save_history() 
    sys.exit() 
 
+
+    
 def show_location():
     print(f"You are here: {current_dir}") 
 def list_files():
@@ -294,7 +297,7 @@ setup_history()
 setup_autocomplete(commands,get_current_dir) 
 try:
  while True:
-    parts = input(f"{current_dir} >").strip().split() 
+    parts = shlex.split( input(f"{current_dir} >").strip().split() ) 
 
     if not parts:
         continue
