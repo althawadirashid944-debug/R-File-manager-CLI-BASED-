@@ -6,6 +6,8 @@ import sys
 import subprocess 
 from autocomplete import setup_autocomplete
 from history import setup_history, save_history 
+from loader import load_plugins 
+from script_loader import find_script
 RED = "\033[1;31m"
 RESET = "\033[0m"
 
@@ -292,31 +294,42 @@ commands= {"pwd":show_location,
 }
 show_banner() 
 welcome_text() 
+load_plugins(commands) 
+ 
 
 setup_history() 
 setup_autocomplete(commands,get_current_dir) 
 try:
- while True:
-    parts = shlex.split( input(f"{current_dir} >").strip() ) 
+    while True:
+        parts = shlex.split(input(f"{current_dir} > ").strip())
 
-    if not parts:
-        continue
+        if not parts:
+            continue
 
-    cmd = parts[0]
-    args = parts[1:]
+        cmd = parts[0]
+        args = parts[1:]
 
-    if cmd in commands:
-        commands[cmd](*args)
-    else:
-        try:
-            subprocess.run(parts) 
-        except FileNotFoundError:
-         print("Unknown command") 
+        if cmd in commands:
+            commands[cmd](*args)
+
+        else:
+            script = find_script(cmd)
+
+            if script:
+                subprocess.run([str(script), *args]) 
+
+            else:
+                try:
+                    subprocess.run(parts)
+
+                except FileNotFoundError:
+                    print("Unknown command")
+
 except KeyboardInterrupt:
-    print("\nUse 'exit' to quir R") 
+    print("\nUse 'exit' to quit R")
+
 except EOFError:
     save_history()
     sys.exit() 
-
 
 
