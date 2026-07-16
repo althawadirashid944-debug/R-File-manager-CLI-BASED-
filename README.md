@@ -78,7 +78,7 @@ pip install .
 If `r-shell` is not found, add ~/.local/bin to your PATH:
 export PATH="$HOME/.local/bin:$PATH" 
 
-
+```
 
 ## Philosophy
 
