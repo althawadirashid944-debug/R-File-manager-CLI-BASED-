@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: r-shell
+Version: 0.1.0
+Summary: A hybrid shell combining Python commands and system commands
+Requires-Python: >=3.10

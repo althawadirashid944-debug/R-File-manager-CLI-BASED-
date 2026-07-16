@@ -292,14 +292,16 @@ commands= {"pwd":show_location,
  "zip":zip_item,
  "empty_trash":empty_trash,
 }
-show_banner() 
-welcome_text() 
-load_plugins(commands) 
+
+def main():
+ show_banner() 
+ welcome_text() 
+ load_plugins(commands) 
  
 
-setup_history() 
-setup_autocomplete(commands,get_current_dir) 
-try:
+ setup_history() 
+ setup_autocomplete(commands,get_current_dir) 
+ try:
     while True:
         parts = shlex.split(input(f"{current_dir} > ").strip())
 
@@ -325,11 +327,13 @@ try:
                 except FileNotFoundError:
                     print("Unknown command")
 
-except KeyboardInterrupt:
+ except KeyboardInterrupt:
     print("\nUse 'exit' to quit R")
 
-except EOFError:
+ except EOFError:
     save_history()
     sys.exit() 
 
 
+if __name__== "__main__":
+    main() 

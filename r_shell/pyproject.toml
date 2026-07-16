@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "r-shell"
+version = "0.1.0"
+description = "A hybrid shell combining Python commands and system commands"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+py-modules = [
+    "file_ops",
+    "loader",
+    "script_loader",
+    "autocomplete",
+    "history"
+]
+
+[project.scripts]
+r-shell = "file_ops:main" 
